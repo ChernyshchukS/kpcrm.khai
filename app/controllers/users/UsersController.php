@@ -1,5 +1,6 @@
 <?php
 require_once 'app/models/User.php';
+
 class UsersController
 {
     public function index()
@@ -21,13 +22,11 @@ class UsersController
             && isset($_POST['email'])
             && isset($_POST['login'])
             && isset($_POST['password'])
-            && isset($_POST['confirm_password']))
-        {
+            && isset($_POST['confirm_password'])) {
             $password = $_POST['password'];
             $confirm_password = $_POST['confirm_password'];
 
-            if ($password !== $confirm_password)
-            {
+            if ($password !== $confirm_password) {
                 echo "Passwords do not mach";
                 return;
             }
@@ -38,12 +37,13 @@ class UsersController
                 'email' => $_POST['email'],
                 'login' => $_POST['login'],
                 'password' => $_POST['password'],
-                'role' => 0, //значение роли по умолчанию
+                'role' => 1, //значение роли по умолчанию
             ];
             $userModel->create($data);
             header("Location: index.php?page=users");
         }
     }
+
     public function edit()
     {
         $userModel = new User();
@@ -52,6 +52,7 @@ class UsersController
 
         include 'app/views/users/edit.php';
     }
+
     public function update()
     {
         $userModel = new User();
@@ -59,6 +60,7 @@ class UsersController
 
         header("Location: index.php?page=users");
     }
+
     public function delete()
     {
         $userModel = new User();

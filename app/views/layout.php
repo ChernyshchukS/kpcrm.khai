@@ -19,6 +19,15 @@
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?page=users">Users</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?page=auth&action=register">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?page=auth&action=login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?page=auth&action=logout">Logout</a>
+                </li>
             </ul>
         </div>
     </nav>

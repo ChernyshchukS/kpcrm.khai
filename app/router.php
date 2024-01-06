@@ -1,23 +1,20 @@
 <?php
+
 class Router
 {
     public function run()
     {
         $page = isset($_GET['page']) ? $_GET['page'] : 'home';
-
-        switch ($page)
-        {
+        switch ($page) {
             case '':
             case 'home':
-            $controller = new HomeController();
-            $controller->index();
-            break;
+                $controller = new HomeController();
+                $controller->index();
+                break;
             case 'users':
                 $controller = new UsersController();
-                if (isset($_GET['action']))
-                {
-                    switch ($_GET['action'])
-                    {
+                if (isset($_GET['action'])) {
+                    switch ($_GET['action']) {
                         case 'create':
                             $controller->create();
                             break;
@@ -34,9 +31,32 @@ class Router
                             $controller->delete();
                             break;
                     }
-                } else
-                {
+                } else {
                     $controller->index();
+                }
+                break;
+            case 'auth':
+                $controller = new AuthController();
+                if (isset($_GET['action'])) {
+                    switch ($_GET['action']) {
+                        case 'register':
+                            $controller->register();
+                            break;
+                        case 'store':
+                            $controller->store();
+                            break;
+                        case 'authenticate':
+                            $controller->authenticate();
+                            break;
+                        case 'login':
+                            $controller->login();
+                            break;
+                        case 'logout':
+                            $controller->loguot();
+                            break;
+                    }
+                } else {
+                    $controller->login();
                 }
                 break;
             default:

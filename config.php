@@ -1,10 +1,12 @@
 <?php
+//var_dump($_POST);
 function tt($str)
 {
     echo "<pre>";
-        print_r($str);
+    print_r($str);
     echo "</pre>";
 }
+
 function tte($str)
 {
     echo "<pre>";
@@ -12,6 +14,7 @@ function tte($str)
     echo "</pre>";
     exit();
 }
+
 return [
     'db_host' => 'localhost',
     'db_name' => 'kpcrm',
