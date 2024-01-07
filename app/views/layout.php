@@ -17,6 +17,9 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
+                    <a class="nav-link" href="index.php?page=roles">Roles</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="index.php?page=users">Users</a>
                 </li>
                 <li class="nav-item">

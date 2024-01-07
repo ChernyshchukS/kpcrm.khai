@@ -1,5 +1,5 @@
 <?php
-
+require_once 'app/models/Role.php';
 class User
 {
     private $db;
@@ -10,37 +10,13 @@ class User
         try {
             $result = $this->db->query('SELECT * FROM `users` LIMIT 1');
         } catch (PDOException $e) {
+            $role = new Role();
             $this->createTable();
         }
     }
 
     public function createTable(): bool
     {
-        $roleTableQuery = "
-SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS = 0;
-
--- ----------------------------
--- Table structure for roles
--- ----------------------------
--- DROP TABLE IF EXISTS `roles`;
-CREATE TABLE IF NOT EXISTS `roles`  (
-  `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'id роли',
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'название роли',
-  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'описание роли',
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `idxunic_roles_name`(`name` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of roles
--- ----------------------------
-INSERT INTO `roles` VALUES (1, 'user', 'can view');
-INSERT INTO `roles` VALUES (2, 'manager', 'can edit');
-INSERT INTO `roles` VALUES (3, 'admin', 'admin have all roles');
-
-SET FOREIGN_KEY_CHECKS = 1;
-        ";
         $userTableQuery = "
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
@@ -63,6 +39,7 @@ CREATE TABLE `users`  (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'дата создания учетной записи',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `idxunic_users_login`(`login` ASC) USING BTREE,
+  UNIQUE INDEX `idxunic_users_email`(`email` ASC) USING BTREE,
   INDEX `role`(`role` ASC) USING BTREE,
   CONSTRAINT `users_ibfk_1` FOREIGN KEY (`role`) REFERENCES `roles` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
@@ -83,26 +60,10 @@ VALUES
 SET FOREIGN_KEY_CHECKS = 1;
         ";
         try {
-            $this->db->exec($roleTableQuery);
             $password = password_hash('password', PASSWORD_DEFAULT);
             $stmt = $this->db->prepare($userTableQuery);
             $stmt->execute([$password, $password, $password]);
             return true;
-        } catch (PDOException $e) {
-            return false;
-        }
-    }
-
-    public function readRoles()
-    {
-        $query = "SELECT * FROM `roles`";
-        try {
-            $stmt = $this->db->query($query);
-            $result = [];
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $result[] = $row;
-            }
-            return $result;
         } catch (PDOException $e) {
             return false;
         }
@@ -141,7 +102,8 @@ FROM `users`
         $email = trim(strtolower($data['email']));
         $login = trim(strtolower($data['login']));
         $password = password_hash($data['password'], PASSWORD_DEFAULT);
-        $role = $data['role'];
+        $role = Role::DEFAULT_USER; //назначаем роль по умолчанию
+        //$role = $data['role'];
         //$password = $data['password'];
         //$create_at = date('Y-m-d H:i:s');
 
@@ -185,8 +147,9 @@ INSERT
         }
     }
 
-    public function update($id, $data): bool
+    public function update($data): bool
     {
+        $id = $data['id'];
         $name = $data['name'];
         $email = trim(strtolower($data['email']));
         $login = trim(strtolower($data['login']));

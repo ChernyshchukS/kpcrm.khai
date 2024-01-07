@@ -1,5 +1,6 @@
 <?php
 require_once 'app/models/User.php';
+require_once 'app/models/Role.php';
 
 class UsersController
 {
@@ -37,7 +38,6 @@ class UsersController
                 'email' => $_POST['email'],
                 'login' => $_POST['login'],
                 'password' => $_POST['password'],
-                'role' => 1, //значение роли по умолчанию
             ];
             $userModel->create($data);
             header("Location: index.php?page=users");
@@ -48,7 +48,8 @@ class UsersController
     {
         $userModel = new User();
         $user = $userModel->read($_GET['id']);
-        $roles = $userModel->readRoles();
+        $roleModel = new Role();
+        $roles = $roleModel->readAll();
 
         include 'app/views/users/edit.php';
     }
@@ -56,7 +57,7 @@ class UsersController
     public function update()
     {
         $userModel = new User();
-        $userModel->update($_GET['id'], $_POST);
+        $userModel->update($_POST);
 
         header("Location: index.php?page=users");
     }

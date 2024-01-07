@@ -26,7 +26,6 @@ class AuthController
                 'email' => $_POST['email'],
                 'login' => $_POST['login'],
                 'password' => $_POST['password'],
-                'role' => 1, //значение роли по умолчанию
             ];
             $authModel = new AuthUser();
             $authModel->register($data);
@@ -48,23 +47,25 @@ class AuthController
             $remember = $_POST['remember'] ?? '';
             $authModel = new AuthUser();
             $user = $authModel->findByEmail($email);
-            if ($user
-                && password_verify($password, $user['password'])) {
-                session_start();
-                $_SESSION['user_id'] = $user['id'];
-                $_SESSION['user_role'] = $user['role'];
-                if ($remember == 'on') {
-                    setcookie('user_email', $email,
-                        time() + (7 * 24 * 60 * 60));
-                    setcookie('user_password', $password,
-                        time() + (7 * 24 * 60 * 60));
+            if ($user) {
+                $user = $authModel->login($email, $password);
+                if ($user) {
+                    session_start();
+                    $_SESSION['user_id'] = $user['id'];
+                    $_SESSION['user_role'] = $user['role'];
+                    if ($remember == 'on') {
+                        setcookie('user_email', $email,
+                            time() + (7 * 24 * 60 * 60));
+                        setcookie('user_password', $password,
+                            time() + (7 * 24 * 60 * 60));
+                    }
+                    header("Location: index.php");
                 }
-                header("Location: index.php");
             } else echo 'Invalid email or password';
         }
     }
 
-    public function loguot()
+    public function logout()
     {
         session_start();
         session_unset();
