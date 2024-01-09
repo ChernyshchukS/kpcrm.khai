@@ -1,6 +1,6 @@
 <?php
-require_once 'app/models/Role.php';
-class User
+require_once 'app/models/roles/RoleModel.php';
+class UserModel
 {
     private $db;
 
@@ -10,7 +10,7 @@ class User
         try {
             $result = $this->db->query('SELECT * FROM `users` LIMIT 1');
         } catch (PDOException $e) {
-            $role = new Role();
+            $role = new RoleModel();
             $this->createTable();
         }
     }
@@ -102,7 +102,7 @@ FROM `users`
         $email = trim(strtolower($data['email']));
         $login = trim(strtolower($data['login']));
         $password = password_hash($data['password'], PASSWORD_DEFAULT);
-        $role = Role::DEFAULT_USER; //назначаем роль по умолчанию
+        $role = RoleModel::DEFAULT_USER; //назначаем роль по умолчанию
         //$role = $data['role'];
         //$password = $data['password'];
         //$create_at = date('Y-m-d H:i:s');

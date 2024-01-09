@@ -1,5 +1,5 @@
 <?php
-require_once 'app/models/AuthUser.php';
+require_once 'app/models/auth/AuthModel.php';
 
 class AuthController
 {
@@ -27,7 +27,7 @@ class AuthController
                 'login' => $_POST['login'],
                 'password' => $_POST['password'],
             ];
-            $authModel = new AuthUser();
+            $authModel = new AuthModel();
             $authModel->register($data);
             header("Location: index.php?page=auth&action=login");
         }
@@ -45,7 +45,7 @@ class AuthController
             $email = $_POST['email'];
             $password = $_POST['password'];
             $remember = $_POST['remember'] ?? '';
-            $authModel = new AuthUser();
+            $authModel = new AuthModel();
             $user = $authModel->findByEmail($email);
             if ($user) {
                 $user = $authModel->login($email, $password);

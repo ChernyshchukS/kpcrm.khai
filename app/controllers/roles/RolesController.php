@@ -1,11 +1,11 @@
 <?php
-require_once 'app/models/Role.php';
+require_once 'app/models/roles/RoleModel.php';
 
 class RolesController
 {
     public function index()
     {
-        $roleModel = new Role();
+        $roleModel = new RoleModel();
         $roles = $roleModel->readAll();
 
         include 'app/views/roles/index.php';
@@ -21,7 +21,7 @@ class RolesController
         if (isset($_POST['name'])
             && isset($_POST['description'])) {
 
-            $roleModel = new Role();
+            $roleModel = new RoleModel();
             $roleModel->create($_POST);
             header("Location: index.php?page=roles");
         }
@@ -29,7 +29,7 @@ class RolesController
 
     public function edit()
     {
-        $roleModel = new Role();
+        $roleModel = new RoleModel();
         $role = $roleModel->read($_GET['id']);
 
         include 'app/views/roles/edit.php';
@@ -37,7 +37,7 @@ class RolesController
 
     public function update()
     {
-        $roleModel = new Role();
+        $roleModel = new RoleModel();
         $roleModel->update($_POST);
 
         header("Location: index.php?page=roles");
@@ -45,7 +45,7 @@ class RolesController
 
     public function delete()
     {
-        $roleModel = new Role();
+        $roleModel = new RoleModel();
         $roleModel->delete($_GET['id']);
         header("Location: index.php?page=roles");
     }

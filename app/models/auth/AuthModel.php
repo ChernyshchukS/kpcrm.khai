@@ -1,7 +1,7 @@
 <?php
-require_once 'app/models/User.php';
+require_once 'app/models/users/UserModel.php';
 
-class AuthUser
+class AuthModel
 {
     private $db;
 
@@ -11,13 +11,13 @@ class AuthUser
         try {
             $result = $this->db->query('SELECT * FROM `users` LIMIT 1');
         } catch (PDOException $e) {
-            $user = new User();
+            $user = new UserModel();
         }
     }
 
     public function register($data): bool
     {
-        $user = new User();
+        $user = new UserModel();
         return $user->create($data);
 //        $name = $data['name'];
 //        $email = trim(strtolower($data['email']));

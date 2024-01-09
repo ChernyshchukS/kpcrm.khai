@@ -1,6 +1,6 @@
 <?php
 
-class Role
+class RoleModel
 {
     private $db;
     const DEFAULT_USER = 5;
@@ -92,7 +92,8 @@ INSERT
         $query = "DELETE FROM `roles` WHERE id = ?";
         try {
             $stmt = $this->db->prepare($query);
-            $stmt->execute([$id]);
+//            нужно решить, что делать с теми пользователями, у которых эта роль
+//            $stmt->execute([$id]);
             return true;
         } catch (PDOException $e) {
             return false;

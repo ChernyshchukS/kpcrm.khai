@@ -1,12 +1,12 @@
 <?php
-require_once 'app/models/User.php';
-require_once 'app/models/Role.php';
+require_once 'app/models/roles/RoleModel.php';
+require_once 'app/models/users/UserModel.php';
 
 class UsersController
 {
     public function index()
     {
-        $userModel = new User();
+        $userModel = new UserModel();
         $users = $userModel->readAll();
 
         include 'app/views/users/index.php';
@@ -32,7 +32,7 @@ class UsersController
                 return;
             }
 
-            $userModel = new User();
+            $userModel = new UserModel();
             $data = [
                 'name' => $_POST['name'],
                 'email' => $_POST['email'],
@@ -46,9 +46,9 @@ class UsersController
 
     public function edit()
     {
-        $userModel = new User();
+        $userModel = new UserModel();
         $user = $userModel->read($_GET['id']);
-        $roleModel = new Role();
+        $roleModel = new RoleModel();
         $roles = $roleModel->readAll();
 
         include 'app/views/users/edit.php';
@@ -56,7 +56,7 @@ class UsersController
 
     public function update()
     {
-        $userModel = new User();
+        $userModel = new UserModel();
         $userModel->update($_POST);
 
         header("Location: index.php?page=users");
@@ -64,7 +64,7 @@ class UsersController
 
     public function delete()
     {
-        $userModel = new User();
+        $userModel = new UserModel();
         $userModel->delete($_GET['id']);
         header("Location: index.php?page=users");
     }
