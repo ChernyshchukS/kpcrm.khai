@@ -15,9 +15,8 @@ function tte($str)
     exit();
 }
 
-return [
-    'db_host' => 'localhost',
-    'db_name' => 'kpcrm',
-    'db_user' => 'root',
-    'db_pass' => '',
-];
+const APP_BASE_PATH = '';
+const DB_HOST = 'localhost';
+const DB_NAME = 'kpcrm';
+const DB_USER = 'root';
+const DB_PASS = '';

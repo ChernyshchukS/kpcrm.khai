@@ -5,7 +5,7 @@ ob_start();
 <div class="row justify-content-center mt-5">
     <div class="col-lg-6 col-md-8 col-sm-10">
         <h1 class="text-center mb-4">Authorization</h1>
-        <form method="POST" action="index.php?page=auth&action=authenticate">
+        <form method="POST" action="<?= APP_BASE_PATH ?>/auth/authenticate">
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control"
@@ -26,7 +26,7 @@ ob_start();
         <div class="mt-4">
             <p>
                 Don't have an account?
-                <a href="index.php?page=auth&action=register">
+                <a href="<?= APP_BASE_PATH ?>/auth/register">
                     Register here
                 </a>
             </p>

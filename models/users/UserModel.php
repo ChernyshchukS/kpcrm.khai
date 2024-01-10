@@ -1,5 +1,10 @@
 <?php
-require_once 'app/models/roles/RoleModel.php';
+
+namespace models\users;
+
+use models\Database;
+use models\roles\RoleModel;
+
 class UserModel
 {
     private $db;
@@ -9,7 +14,7 @@ class UserModel
         $this->db = Database::getInstance()->getConnection();
         try {
             $result = $this->db->query('SELECT * FROM `users` LIMIT 1');
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             $role = new RoleModel();
             $this->createTable();
         }
@@ -64,7 +69,7 @@ SET FOREIGN_KEY_CHECKS = 1;
             $stmt = $this->db->prepare($userTableQuery);
             $stmt->execute([$password, $password, $password]);
             return true;
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             return false;
         }
     }
@@ -87,11 +92,11 @@ FROM `users`
         try {
             $stmt = $this->db->query($query);
             $result = [];
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
                 $result[] = $row;
             }
             return $result;
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             return false;
         }
     }
@@ -118,7 +123,7 @@ INSERT
             $stmt = $this->db->prepare($query);
             $stmt->execute([$name, $email, $login, $password, $role]);
             return true;
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             return false;
         }
     }
@@ -130,7 +135,7 @@ INSERT
             $stmt = $this->db->prepare($query);
             $stmt->execute([$id]);
             return true;
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             return false;
         }
     }
@@ -141,8 +146,8 @@ INSERT
         try {
             $stmt = $this->db->prepare($query);
             $stmt->execute([$id]);
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
+            return $stmt->fetch(\PDO::FETCH_ASSOC);
+        } catch (\PDOException $e) {
             return false;
         }
     }
@@ -161,7 +166,7 @@ INSERT
             $stmt = $this->db->prepare($query);
             $stmt->execute([$name, $email, $login, $role, $id]);
             return true;
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             return false;
         }
     }

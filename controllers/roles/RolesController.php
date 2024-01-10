@@ -1,5 +1,7 @@
 <?php
-require_once 'app/models/roles/RoleModel.php';
+
+namespace controllers\roles;
+use models\roles\RoleModel;
 
 class RolesController
 {
@@ -23,14 +25,16 @@ class RolesController
 
             $roleModel = new RoleModel();
             $roleModel->create($_POST);
-            header("Location: index.php?page=roles");
+
+            $path = '/'.APP_BASE_PATH.'roles';
+            header("Location: $path");
         }
     }
 
-    public function edit()
+    public function edit($params)
     {
         $roleModel = new RoleModel();
-        $role = $roleModel->read($_GET['id']);
+        $role = $roleModel->read($params['id']);
 
         include 'app/views/roles/edit.php';
     }
@@ -40,13 +44,16 @@ class RolesController
         $roleModel = new RoleModel();
         $roleModel->update($_POST);
 
-        header("Location: index.php?page=roles");
+        $path = '/'.APP_BASE_PATH.'roles';
+        header("Location: $path");
     }
 
-    public function delete()
+    public function delete($params)
     {
         $roleModel = new RoleModel();
-        $roleModel->delete($_GET['id']);
-        header("Location: index.php?page=roles");
+        $roleModel->delete($params['id']);
+
+        $path = '/'.APP_BASE_PATH.'roles';
+        header("Location: $path");
     }
 }

@@ -6,7 +6,7 @@ ob_start();
 <div class="row justify-content-center mt-5">
     <div class="col-lg-6 col-md-8 col-sm-10">
         <h1 class="text-center mb-4">Page edit</h1>
-        <form method="post" action="index.php?page=pages&action=update">
+        <form method="post" action="<?= APP_BASE_PATH ?>/pages/update">
             <input type="hidden" name="id" value="<?php echo $page['id']; ?>">
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>

@@ -1,6 +1,8 @@
 <?php
-require_once 'app/models/roles/RoleModel.php';
-require_once 'app/models/users/UserModel.php';
+
+namespace controllers\users;
+use models\roles\RoleModel;
+use models\users\UserModel;
 
 class UsersController
 {
@@ -40,14 +42,15 @@ class UsersController
                 'password' => $_POST['password'],
             ];
             $userModel->create($data);
-            header("Location: index.php?page=users");
+            $path = '/'.APP_BASE_PATH.'users';
+            header("Location: $path");
         }
     }
 
-    public function edit()
+    public function edit($params)
     {
         $userModel = new UserModel();
-        $user = $userModel->read($_GET['id']);
+        $user = $userModel->read($params['id']);
         $roleModel = new RoleModel();
         $roles = $roleModel->readAll();
 
@@ -58,14 +61,15 @@ class UsersController
     {
         $userModel = new UserModel();
         $userModel->update($_POST);
-
-        header("Location: index.php?page=users");
+        $path = '/'.APP_BASE_PATH.'users';
+        header("Location: $path");
     }
 
-    public function delete()
+    public function delete($params)
     {
         $userModel = new UserModel();
-        $userModel->delete($_GET['id']);
-        header("Location: index.php?page=users");
+        $userModel->delete($params['id']);
+        $path = '/'.APP_BASE_PATH.'users';
+        header("Location: $path");
     }
 }

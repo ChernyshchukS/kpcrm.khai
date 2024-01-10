@@ -5,7 +5,7 @@ ob_start();
 ?>
 
     <h1>Roles list</h1>
-    <a href="index.php?page=roles&action=create" class="btn btn-outline-success">Create role</a>
+    <a href="<?= APP_BASE_PATH ?>/roles/create" class="btn btn-outline-success">Create role</a>
     <table class="table">
         <thead>
         <tr>
@@ -23,11 +23,11 @@ ob_start();
                 <td><?php echo $role['name']; ?></td>
                 <td><?php echo $role['description']; ?></td>
                 <td>
-                    <a href="index.php?page=roles&action=edit&id=<?php echo $role['id']; ?>" class="btn btn-outline-primary">Edit</a>
+                    <a href="<?= APP_BASE_PATH ?>/roles/edit/<?php echo $role['id']; ?>" class="btn btn-outline-primary">Edit</a>
                 </td>
                 <td>
                     <form method="post"
-                          action="index.php?page=roles&action=delete&id=<?php echo $role['id']; ?>"
+                          action="<?= APP_BASE_PATH ?>/roles/delete/<?php echo $role['id']; ?>"
                           class="d-inline-block">
                         <button type="submit" class="btn btn-sm btn-outline-danger"
                                 onclick="return confirm('Are you sure?')">Delete</button>

@@ -1,4 +1,9 @@
 <?php
+
+namespace models\pages;
+
+use models\Database;
+
 class PageModel
 {
     private $db;
@@ -8,8 +13,7 @@ class PageModel
         $this->db = Database::getInstance()->getConnection();
         try {
             $result = $this->db->query('SELECT * FROM `pages` LIMIT 1');
-        } catch (PDOException $e) {
-            $role = new RoleModel();
+        } catch (\PDOException $e) {
             $this->createTable();
         }
     }
@@ -55,7 +59,7 @@ SET FOREIGN_KEY_CHECKS = 1;
             $stmt = $this->db->prepare($userTableQuery);
             $stmt->execute([$password, $password, $password]);
             return true;
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             return false;
         }
     }
@@ -68,11 +72,11 @@ SELECT * FROM `pages`
         try {
             $stmt = $this->db->query($query);
             $result = [];
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
                 $result[] = $row;
             }
             return $result;
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             return false;
         }
     }
@@ -93,7 +97,7 @@ INSERT
             $stmt = $this->db->prepare($query);
             $stmt->execute([$title, $slug]);
             return true;
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             return false;
         }
     }
@@ -105,7 +109,7 @@ INSERT
             $stmt = $this->db->prepare($query);
             $stmt->execute([$id]);
             return true;
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             return false;
         }
     }
@@ -116,8 +120,8 @@ INSERT
         try {
             $stmt = $this->db->prepare($query);
             $stmt->execute([$id]);
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
+            return $stmt->fetch(\PDO::FETCH_ASSOC);
+        } catch (\PDOException $e) {
             return false;
         }
     }
@@ -134,7 +138,7 @@ INSERT
             $stmt = $this->db->prepare($query);
             $stmt->execute([$title, $slug, $id]);
             return true;
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             return false;
         }
     }

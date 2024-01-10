@@ -5,7 +5,7 @@ ob_start();
 ?>
 
     <h1>Users list</h1>
-    <a href="index.php?page=users&action=create" class="btn btn-outline-success">Create user</a>
+    <a href="<?= APP_BASE_PATH ?>/users/create" class="btn btn-outline-success">Create user</a>
     <table class="table">
         <thead>
         <tr>
@@ -45,24 +45,16 @@ ob_start();
                 <td><?php echo $user['last_login']; ?></td>
                 <td><?php echo $user['created_at']; ?></td>
                 <td>
-                    <a href="index.php?page=users&action=edit&id=<?php echo $user['id']; ?>" class="btn btn-outline-primary">Edit</a>
+                    <a href="<?= APP_BASE_PATH ?>/users/edit/<?php echo $user['id']; ?>" class="btn btn-outline-primary">Edit</a>
                 </td>
                 <td>
                     <form method="post"
-                          action="index.php?page=users&action=delete&id=<?php echo $user['id']; ?>"
+                          action="<?= APP_BASE_PATH ?>/users/delete/<?php echo $user['id']; ?>"
                           class="d-inline-block">
                         <button type="submit" class="btn btn-sm btn-outline-danger"
                                 onclick="return confirm('Are you sure?')">Delete</button>
                     </form>
                 </td>
-                <!--
-                <td>
-                    <a href="index.php?page=users&action=edit&id=<?php echo $user['id']; ?>" class="btn btn-primary">Edit</a>
-                </td>
-                <td>
-                    <a href="index.php?page=users&action=delete&id=<?php echo $user['id']; ?>" class="btn btn-danger">Delete</a>
-                </td>
-                -->
             </tr>
         <?php endforeach; ?>
         </tbody>

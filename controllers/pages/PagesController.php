@@ -1,5 +1,7 @@
 <?php
-require_once 'app/models/pages/PageModel.php';
+
+namespace controllers\pages;
+use models\pages\PageModel;
 
 class PagesController
 {
@@ -22,21 +24,23 @@ class PagesController
             && isset($_POST['slug'])) {
 
             if (empty(trim($_POST['title'])) ||
-                empty(trim($_POST['slug']))){
+                empty(trim($_POST['slug']))) {
                 echo "Title and slug required!";
                 return;
             }
 
             $pageModel = new PageModel();
             $pageModel->create($_POST);
-            header("Location: index.php?page=pages");
+
+            $path = '/'.APP_BASE_PATH.'pages';
+            header("Location: $path");
         }
     }
 
-    public function edit()
+    public function edit($params)
     {
         $pageModel = new PageModel();
-        $page = $pageModel->read($_GET['id']);
+        $page = $pageModel->read($params['id']);
 
         include 'app/views/pages/edit.php';
     }
@@ -44,20 +48,22 @@ class PagesController
     public function update()
     {
         if (empty(trim($_POST['title'])) ||
-            empty(trim($_POST['slug']))){
+            empty(trim($_POST['slug']))) {
             echo "Title and slug required!";
             return;
         }
 
         $pageModel = new PageModel();
         $pageModel->update($_POST);
-        header("Location: index.php?page=pages");
+        $path = '/'.APP_BASE_PATH.'pages';
+        header("Location: $path");
     }
 
-    public function delete()
+    public function delete($params)
     {
         $pageModel = new PageModel();
-        $pageModel->delete($_GET['id']);
-        header("Location: index.php?page=pages");
+        $pageModel->delete($params['id']);
+        $path = '/'.APP_BASE_PATH.'pages';
+        header("Location: $path");
     }
 }

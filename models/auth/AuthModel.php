@@ -1,5 +1,9 @@
 <?php
-require_once 'app/models/users/UserModel.php';
+
+namespace models\auth;
+
+use models\Database;
+use models\users\UserModel;
 
 class AuthModel
 {
@@ -10,7 +14,7 @@ class AuthModel
         $this->db = Database::getInstance()->getConnection();
         try {
             $result = $this->db->query('SELECT * FROM `users` LIMIT 1');
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             $user = new UserModel();
         }
     }
@@ -47,8 +51,8 @@ class AuthModel
         try {
             $stmt = $this->db->prepare($query);
             $stmt->execute([$email]);
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
+            return $stmt->fetch(\PDO::FETCH_ASSOC);
+        } catch (\PDOException $e) {
             return false;
         }
     }
@@ -75,7 +79,7 @@ UPDATE `users` SET `last_login` = NOW()
             $stmt = $this->db->prepare($query);
             $stmt->execute([$email]);
             return true;
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             return false;
         }
     }

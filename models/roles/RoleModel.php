@@ -1,15 +1,20 @@
 <?php
 
+namespace models\roles;
+
+use models\Database;
+
 class RoleModel
 {
     private $db;
     const DEFAULT_USER = 5;
+
     public function __construct()
     {
         $this->db = Database::getInstance()->getConnection();
         try {
             $result = $this->db->query('SELECT * FROM `roles` LIMIT 1');
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             $this->createTable();
         }
     }
@@ -46,7 +51,7 @@ SET FOREIGN_KEY_CHECKS = 1;
         try {
             $this->db->exec($roleTableQuery);
             return true;
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             return false;
         }
     }
@@ -57,11 +62,11 @@ SET FOREIGN_KEY_CHECKS = 1;
         try {
             $stmt = $this->db->query($query);
             $result = [];
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
                 $result[] = $row;
             }
             return $result;
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             return false;
         }
     }
@@ -82,7 +87,7 @@ INSERT
             $stmt = $this->db->prepare($query);
             $stmt->execute([$name, $description]);
             return true;
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             return false;
         }
     }
@@ -95,7 +100,7 @@ INSERT
 //            нужно решить, что делать с теми пользователями, у которых эта роль
 //            $stmt->execute([$id]);
             return true;
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             return false;
         }
     }
@@ -106,8 +111,8 @@ INSERT
         try {
             $stmt = $this->db->prepare($query);
             $stmt->execute([$id]);
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
+            return $stmt->fetch(\PDO::FETCH_ASSOC);
+        } catch (\PDOException $e) {
             return false;
         }
     }
@@ -124,7 +129,7 @@ INSERT
             $stmt = $this->db->prepare($query);
             $stmt->execute([$name, $description, $id]);
             return true;
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             return false;
         }
     }

@@ -6,7 +6,7 @@ ob_start();
 <div class="row justify-content-center mt-5">
     <div class="col-lg-6 col-md-8 col-sm-10">
         <h1 class="text-center mb-4">Role edit</h1>
-        <form method="post" action="index.php?page=roles&action=update">
+        <form method="post" action="<?= APP_BASE_PATH ?>/roles/update">
             <input type="hidden" name="id" value="<?php echo $role['id']; ?>">
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>

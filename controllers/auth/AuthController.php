@@ -1,11 +1,13 @@
 <?php
-require_once 'app/models/auth/AuthModel.php';
+
+namespace controllers\auth;
+use models\auth\AuthModel;
 
 class AuthController
 {
     public function register()
     {
-        include 'app/views/users/register.php';
+        include 'app/views/auth/register.php';
     }
 
     public function store()
@@ -29,13 +31,15 @@ class AuthController
             ];
             $authModel = new AuthModel();
             $authModel->register($data);
-            header("Location: index.php?page=auth&action=login");
+
+            $path = '/'.APP_BASE_PATH.'auth/login';
+            header("Location: $path");
         }
     }
 
     public function login()
     {
-        include 'app/views/users/login.php';
+        include 'app/views/auth/login.php';
     }
 
     public function authenticate()
@@ -59,7 +63,7 @@ class AuthController
                         setcookie('user_password', $password,
                             time() + (7 * 24 * 60 * 60));
                     }
-                    header("Location: index.php");
+                    header("Location: /");
                 }
             } else echo 'Invalid email or password';
         }
@@ -70,6 +74,6 @@ class AuthController
         session_start();
         session_unset();
         session_destroy();
-        header("Location: index.php");
+        header("Location: /");
     }
 }
