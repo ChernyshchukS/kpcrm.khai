@@ -1,13 +1,24 @@
 <?php
 
 namespace controllers\users;
+
+use models\Check;
 use models\roles\RoleModel;
 use models\users\UserModel;
 
 class UsersController
 {
+    private $check;
+
+    public function __construct()
+    {
+        $userRole = $_SESSION['user_role'] ?? null;
+        $this->check = new Check($userRole);
+    }
+
     public function index()
     {
+        $this->check->requirePermission();
         $userModel = new UserModel();
         $users = $userModel->readAll();
 
@@ -16,11 +27,13 @@ class UsersController
 
     public function create()
     {
+        $this->check->requirePermission();
         include 'app/views/users/create.php';
     }
 
     public function store()
     {
+        $this->check->requirePermission();
         if (isset($_POST['name'])
             && isset($_POST['email'])
             && isset($_POST['login'])
@@ -42,13 +55,14 @@ class UsersController
                 'password' => $_POST['password'],
             ];
             $userModel->create($data);
-            $path = '/'.APP_BASE_PATH.'users';
+            $path = '/' . APP_BASE_PATH . 'users';
             header("Location: $path");
         }
     }
 
     public function edit($params)
     {
+        $this->check->requirePermission();
         $userModel = new UserModel();
         $user = $userModel->read($params['id']);
         $roleModel = new RoleModel();
@@ -59,17 +73,19 @@ class UsersController
 
     public function update()
     {
+        $this->check->requirePermission();
         $userModel = new UserModel();
         $userModel->update($_POST);
-        $path = '/'.APP_BASE_PATH.'users';
+        $path = '/' . APP_BASE_PATH . 'users';
         header("Location: $path");
     }
 
     public function delete($params)
     {
+        $this->check->requirePermission();
         $userModel = new UserModel();
         $userModel->delete($params['id']);
-        $path = '/'.APP_BASE_PATH.'users';
+        $path = '/' . APP_BASE_PATH . 'users';
         header("Location: $path");
     }
 }

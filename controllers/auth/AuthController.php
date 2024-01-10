@@ -54,7 +54,7 @@ class AuthController
             if ($user) {
                 $user = $authModel->login($email, $password);
                 if ($user) {
-                    session_start();
+//                    session_start();
                     $_SESSION['user_id'] = $user['id'];
                     $_SESSION['user_role'] = $user['role'];
                     if ($remember == 'on') {
@@ -71,7 +71,7 @@ class AuthController
 
     public function logout()
     {
-        session_start();
+//        session_start();
         session_unset();
         session_destroy();
         header("Location: /");

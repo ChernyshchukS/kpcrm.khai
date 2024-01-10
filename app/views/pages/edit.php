@@ -19,6 +19,18 @@ ob_start();
                        value="<?php echo $page['slug']; ?>" required>
             </div>
             <div class="mb-3">
+                <label for="roles" class="form-label">Role</label>
+                <?php $page_role = explode(",", $page['role']); ?>
+                <?php foreach ($roles as $role): ?>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox"
+                               name="role[]" id="role" value="<?php echo $role['id']; ?>"
+                            <?php echo in_array($role['id'], $page_role) ? 'checked' : ''; ?>>
+                        <label class="form-check-label" for="role"><?php echo $role['name'] ?></label>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <div class="mb-3">
                 <label for="updated_at" class="form-label">Updated at</label>
                 <input type="text" class="form-control" id="updated_at" name="updated_at"
                        value="<?php echo $page['updated_at']; ?>" readonly>

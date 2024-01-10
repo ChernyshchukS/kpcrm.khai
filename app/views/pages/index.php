@@ -12,6 +12,7 @@ ob_start();
             <th scope="col">#</th>
             <th scope="col">Title</th>
             <th scope="col">Slug</th>
+            <th scope="col">Role</th>
             <th scope="col">Updated</th>
             <th scope="col">Created</th>
             <th scope="col">Edit</th>
@@ -24,17 +25,20 @@ ob_start();
                 <th scope="row"><?php echo $page['id']; ?></th>
                 <td><?php echo $page['title']; ?></td>
                 <td><?php echo $page['slug']; ?></td>
+                <td><?php echo $page['role']; ?></td>
                 <td><?php echo $page['updated_at']; ?></td>
                 <td><?php echo $page['created_at']; ?></td>
                 <td>
-                    <a href="<?= APP_BASE_PATH ?>/pages/edit/<?php echo $page['id']; ?>" class="btn btn-outline-primary">Edit</a>
+                    <a href="<?= APP_BASE_PATH ?>/pages/edit/<?php echo $page['id']; ?>"
+                       class="btn btn-outline-primary">Edit</a>
                 </td>
                 <td>
                     <form method="post"
                           action="<?= APP_BASE_PATH ?>/pages/delete/<?php echo $page['id']; ?>"
                           class="d-inline-block">
                         <button type="submit" class="btn btn-sm btn-outline-danger"
-                                onclick="return confirm('Are you sure?')">Delete</button>
+                                onclick="return confirm('Are you sure?')">Delete
+                        </button>
                     </form>
                 </td>
             </tr>

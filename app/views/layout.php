@@ -30,6 +30,14 @@
                         </a>
                     </li>
                     <li>
+                        <a href="<?= APP_BASE_PATH ?>/pages" class="nav-link text-white">
+                            <svg class="bi me-2" width="16" height="16">
+                                <use xlink:href="<?= APP_BASE_PATH ?>/pages"></use>
+                            </svg>
+                            Pages
+                        </a>
+                    </li>
+                    <li>
                         <a href="<?= APP_BASE_PATH ?>/users" class="nav-link text-white">
                             <svg class="bi me-2" width="16" height="16">
                                 <use xlink:href="<?= APP_BASE_PATH ?>/users"></use>
@@ -46,11 +54,11 @@
                         </a>
                     </li>
                     <li>
-                        <a href="<?= APP_BASE_PATH ?>/pages" class="nav-link text-white">
+                        <a href="<?= APP_BASE_PATH ?>/auth/login" class="nav-link text-white">
                             <svg class="bi me-2" width="16" height="16">
-                                <use xlink:href="<?= APP_BASE_PATH ?>/pages"></use>
+                                <use xlink:href="<?= APP_BASE_PATH ?>/auth/login"></use>
                             </svg>
-                            Pages
+                            Login
                         </a>
                     </li>
                     <li>
@@ -59,6 +67,14 @@
                                 <use xlink:href="<?= APP_BASE_PATH ?>/auth/register"></use>
                             </svg>
                             Register
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?= APP_BASE_PATH ?>/auth/logout" class="nav-link text-white">
+                            <svg class="bi me-2" width="16" height="16">
+                                <use xlink:href="<?= APP_BASE_PATH ?>/auth/logout"></use>
+                            </svg>
+                            Logout
                         </a>
                     </li>
                 </ul>
@@ -88,34 +104,6 @@
         </div>
     </div>
 </div>
-
-<!--<div class="container">-->
-<!--    <nav class="navbar navbar-expand-lg navbar-light bg-light">-->
-<!--        <a class="navbar-brand" href="index.php">Internet Store</a>-->
-<!--        <div class="collapse navbar-collapse" id="navbarNav">-->
-<!--            <ul class="navbar-nav">-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" href="index.php?page=roles">Roles</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" href="index.php?page=users">Users</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" href="index.php?page=auth&action=register">Register</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" href="index.php?page=auth&action=login">Login</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" href="index.php?page=auth&action=logout">Logout</a>-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--        </div>-->
-<!--    </nav>-->
-<!--    <div class="container mt-4">-->
-<!--        --><?php //echo $content; ?>
-<!--    </div>-->
-<!--</div>-->
 
 <footer class="footer mt-auto py-3 bg-light">
     <div class="container text-center">
