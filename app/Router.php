@@ -7,17 +7,26 @@ use controllers\home\HomeController;
 use controllers\pages\PagesController;
 use controllers\roles\RolesController;
 use controllers\users\UsersController;
+use controllers\todo\categories\CategoriesController;
 
 class Router
 {
     // определяем маршруты
     private array $routes = array(
         '/^' . APP_BASE_PATH . '\/?$/' => array('controller' => 'home\\HomeController', 'action' => 'index'),
-        '/^' . APP_BASE_PATH . '\/users(\/(?P<action>\w+)(\/(?<id>\w+))?)?$/' => array('controller' => 'users\\UsersController'),
-        '/^' . APP_BASE_PATH . '\/roles(\/(?P<action>\w+)(\/(?<id>\w+))?)?$/' => array('controller' => 'roles\\RolesController'),
-        '/^' . APP_BASE_PATH . '\/pages(\/(?P<action>\w+)(\/(?<id>\w+))?)?$/' => array('controller' => 'pages\\PagesController'),
-        '/^' . APP_BASE_PATH . '\/auth(\/(?P<action>\w+)(\/(?<id>\w+))?)?$/' => array('controller' => 'auth\\AuthController'),
-        // '/^' . APP_BASE_PATH . '\/users$/' => array('controller' => 'users\\UsersController'),
+        '/^' . APP_BASE_PATH . '\/users(\/(?P<action>\w+)(\/(?<id>\w+))?)?$/' =>
+            array('controller' => 'users\\UsersController'),
+        '/^' . APP_BASE_PATH . '\/roles(\/(?P<action>\w+)(\/(?<id>\w+))?)?$/' =>
+            array('controller' => 'roles\\RolesController'),
+        '/^' . APP_BASE_PATH . '\/pages(\/(?P<action>\w+)(\/(?<id>\w+))?)?$/' =>
+            array('controller' => 'pages\\PagesController'),
+        '/^' . APP_BASE_PATH . '\/auth(\/(?P<action>\w+)(\/(?<id>\w+))?)?$/' =>
+            array('controller' => 'auth\\AuthController'),
+        '/^' . APP_BASE_PATH . '\/todo\/categories(\/(?P<action>\w+)(\/(?<id>\w+))?)?$/' =>
+            array('controller' => 'todo\categories\\CategoriesController'),
+
+        // '/^' . APP_BASE_PATH . '\/users$/' =>
+        // array('controller' => 'users\\UsersController'),
     );
 
     public function run()

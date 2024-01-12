@@ -20,7 +20,7 @@ class PageModel
 
     public function createTable(): bool
     {
-        $pageTableQuery = "
+        $query = "
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
@@ -68,12 +68,19 @@ VALUES
     ('Pages Store',  'pages/store',  '1,2,3'),
     ('Pages Edit',   'pages/edit',   '1,2,3'),
     ('Pages Update', 'pages/update', '1,2,3'),
-    ('Pages Delete', 'pages/delete', '1,2,3');
+    ('Pages Delete', 'pages/delete', '1,2,3'),
 
+    ('Categories All',    'todo/categories',        '1,2,3,4,5'),
+    ('Categories Create', 'todo/categories/create', '1,2,3,4,5'),
+    ('Categories Store',  'todo/categories/store',  '1,2,3,4,5'),
+    ('Categories Edit',   'todo/categories/edit',   '1,2,3,4,5'),
+    ('Categories Update', 'todo/categories/update', '1,2,3,4,5'),
+    ('Categories Delete', 'todo/categories/delete', '1,2,3,4,5');
+    
 SET FOREIGN_KEY_CHECKS = 1;
         ";
         try {
-            $this->db->exec($pageTableQuery);
+            $this->db->exec($query);
             return true;
         } catch (\PDOException $e) {
             return false;

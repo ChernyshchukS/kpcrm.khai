@@ -22,7 +22,8 @@
                 <hr>
                 <ul class="nav nav-pills flex-column mb-auto">
                     <li class="nav-item">
-                        <a href="<?= APP_BASE_PATH ?>/" class="nav-link" aria-current="page">
+                        <a href="<?= APP_BASE_PATH ?>/"
+                            <?= is_active(APP_BASE_PATH . '/');?>>
                             <svg class="bi me-2" width="16" height="16">
                                 <use xlink:href="<?= APP_BASE_PATH ?>/"></use>
                             </svg>
@@ -30,7 +31,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="<?= APP_BASE_PATH ?>/pages" class="nav-link text-white">
+                        <a href="<?= APP_BASE_PATH ?>/pages"
+                            <?= is_active(APP_BASE_PATH . '/pages');?>>
                             <svg class="bi me-2" width="16" height="16">
                                 <use xlink:href="<?= APP_BASE_PATH ?>/pages"></use>
                             </svg>
@@ -38,7 +40,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="<?= APP_BASE_PATH ?>/users" class="nav-link text-white">
+                        <a href="<?= APP_BASE_PATH ?>/users"
+                            <?= is_active(APP_BASE_PATH . '/users');?>>
                             <svg class="bi me-2" width="16" height="16">
                                 <use xlink:href="<?= APP_BASE_PATH ?>/users"></use>
                             </svg>
@@ -46,7 +49,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="<?= APP_BASE_PATH ?>/roles" class="nav-link text-white">
+                        <a href="<?= APP_BASE_PATH ?>/roles"
+                            <?= is_active(APP_BASE_PATH . '/roles');?>>
                             <svg class="bi me-2" width="16" height="16">
                                 <use xlink:href="<?= APP_BASE_PATH ?>/roles"></use>
                             </svg>
@@ -54,7 +58,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="<?= APP_BASE_PATH ?>/auth/login" class="nav-link text-white">
+                        <a href="<?= APP_BASE_PATH ?>/auth/login"
+                            <?= is_active(APP_BASE_PATH . '/auth/login');?>>
                             <svg class="bi me-2" width="16" height="16">
                                 <use xlink:href="<?= APP_BASE_PATH ?>/auth/login"></use>
                             </svg>
@@ -62,7 +67,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="<?= APP_BASE_PATH ?>/auth/register" class="nav-link text-white">
+                        <a href="<?= APP_BASE_PATH ?>/auth/register"
+                            <?= is_active(APP_BASE_PATH . '/auth/register');?>>
                             <svg class="bi me-2" width="16" height="16">
                                 <use xlink:href="<?= APP_BASE_PATH ?>/auth/register"></use>
                             </svg>
@@ -70,11 +76,23 @@
                         </a>
                     </li>
                     <li>
-                        <a href="<?= APP_BASE_PATH ?>/auth/logout" class="nav-link text-white">
+                        <a href="<?= APP_BASE_PATH ?>/auth/logout"
+                            <?= is_active(APP_BASE_PATH . '/auth/logout');?>>
                             <svg class="bi me-2" width="16" height="16">
                                 <use xlink:href="<?= APP_BASE_PATH ?>/auth/logout"></use>
                             </svg>
                             Logout
+                        </a>
+                    </li>
+                    <hr>
+                    <h4>To do list</h4>
+                    <li>
+                        <a href="<?= APP_BASE_PATH ?>/todo/categories"
+                            <?= is_active(APP_BASE_PATH . '/todo/categories');?>>
+                            <svg class="bi me-2" width="16" height="16">
+                                <use xlink:href="<?= APP_BASE_PATH ?>/todo/categories"></use>
+                            </svg>
+                            Categories
                         </a>
                     </li>
                 </ul>

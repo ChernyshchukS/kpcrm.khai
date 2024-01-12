@@ -22,7 +22,7 @@ class UserModel
 
     public function createTable(): bool
     {
-        $userTableQuery = "
+        $query = "
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
@@ -66,7 +66,7 @@ SET FOREIGN_KEY_CHECKS = 1;
         ";
         try {
             $password = password_hash('password', PASSWORD_DEFAULT);
-            $stmt = $this->db->prepare($userTableQuery);
+            $stmt = $this->db->prepare($query);
             $stmt->execute([$password, $password, $password]);
             return true;
         } catch (\PDOException $e) {

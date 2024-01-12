@@ -21,7 +21,7 @@ class RoleModel
 
     public function createTable(): bool
     {
-        $roleTableQuery = "
+        $query = "
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
@@ -49,7 +49,7 @@ INSERT INTO `roles` VALUES (5, 'Subscriber', 'Абонент (Subscriber): мо�
 SET FOREIGN_KEY_CHECKS = 1;
         ";
         try {
-            $this->db->exec($roleTableQuery);
+            $this->db->exec($query);
             return true;
         } catch (\PDOException $e) {
             return false;
